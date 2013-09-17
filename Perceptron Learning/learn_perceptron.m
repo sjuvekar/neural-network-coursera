@@ -106,13 +106,14 @@ function [w] = update_weights(neg_examples, pos_examples, w_current)
 w = w_current;
 num_neg_examples = size(neg_examples,1);
 num_pos_examples = size(pos_examples,1);
+learn_rate = 1;
 for i=1:num_neg_examples
     this_case = neg_examples(i,:);
     x = this_case'; %Hint
     activation = this_case*w;
     if (activation >= 0)
         %YOUR CODE HERE
-        w = w - x;
+        w = w - learn_rate * x;
     end
 end
 for i=1:num_pos_examples
@@ -121,7 +122,7 @@ for i=1:num_pos_examples
     activation = this_case*w;
     if (activation < 0)
         %YOUR CODE HERE
-        w = w + x;
+        w = w + learn_rate * x;
     end
 end
 
